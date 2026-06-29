@@ -1,0 +1,627 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>MUDA · Storybook — Design System de KOI SAMSA</title>
+<!-- Tipografía MUDA (glosario firmado 27-jun): Newsreader · Albert Sans · Fira Sans · Fira Code -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,400&family=Albert+Sans:wght@400;500;600;700&family=Fira+Code:wght@400;500&family=Fira+Sans:wght@400;500&display=swap" rel="stylesheet">
+<style>
+/* ═══════════════════════════════════════════════════════════════
+   MUDA · Storybook estático · muestrario + explicación (no funcional)
+   Color: 14 piezas firmadas (!DECISIÓN — Sistema cromático MUDA 14 piezas)
+   Tipografía: glosario firmado (Newsreader/Albert/Fira/Fira Code)
+   Componentes: clases reales de ks-components.css
+   Hex verificados uno a uno contra la !DECISIÓN + ks-tokens.css. No inventados.
+   ── */
+:root{
+  /* — Neutros (4) — */
+  --hierro:#2B200F; --calcio:#FAF9F7; --niquel:#B3B7B8; --caliza:#D1CBBA;
+  /* — Corporativos (2 + cobre) — */
+  --turquesa:#00A6AB; --cobalto:#335E82; --cobre:#C67E3E;
+  /* — Semánticos / uso — */
+  --rojo:#AC4952; --goetita:#FBE87E; --goetita-tx:#B5841F;
+  --verde-patina:#9DC5B9; --verde-teofrastita:#2F8F67;
+  /* — Derivados (3) — */
+  --terra-rossa:#CE837A; --malva:#AE6586; --marmol-rosa:#EDC4BD;
+  /* — superficies (CLARO · cal/sílice) — theme-switchable — */
+  --paper:var(--calcio); --surface-muted:#F6F6F3; --tint-teal:#EAF2F2;
+  --canvas:#FAF9F7; --panel:#FFFFFF; --elevado:#FFFFFF;
+  --border:rgba(43,32,15,.10); --border-strong:rgba(43,32,15,.17);
+  --ink:#2B200F;
+  --t87:rgba(43,32,15,.87); --t72:rgba(43,32,15,.72); --t55:rgba(43,32,15,.55); --t45:rgba(43,32,15,.45);
+  --turquesa-som:#008B96;
+  /* — tipografía — */
+  --serif:'Newsreader',Georgia,serif; --sans:'Albert Sans',system-ui,sans-serif;
+  --mono:'Fira Code','Fira Sans',monospace;
+  /* — radios / espacio firmados (USA-MUDA §4) — */
+  --r-sm:5px; --r-md:10px; --r-lg:15px;
+}
+
+*{box-sizing:border-box}
+body{margin:0;font-family:var(--serif);color:var(--t87);background:var(--paper);line-height:1.65}
+
+/* — layout 2 columnas (sidebar Storybook + canvas) — */
+.sb{display:grid;grid-template-columns:280px 1fr;max-width:1280px;margin:0 auto;align-items:start}
+
+/* — sidebar — */
+.sb-nav{position:sticky;top:0;align-self:start;height:100vh;overflow-y:auto;padding:30px 28px 40px 34px;border-right:1px solid var(--border);background:var(--surface-muted)}
+.sb-brand{font-family:var(--mono);font-weight:500;letter-spacing:.2em;text-transform:uppercase;font-size:15px;color:var(--hierro);margin:0 0 4px}
+.sb-sub{font-family:var(--sans);font-size:12px;color:var(--t55);margin:0 0 26px}
+.sb-nav .grp--first{border-top:none;padding-top:0;margin-top:0}
+.sb-nav .grp{font-family:var(--mono);font-size:10px;font-weight:500;letter-spacing:.16em;text-transform:uppercase;color:var(--turquesa-som);margin:20px 0 6px;padding-top:14px;border-top:1px solid var(--border)}
+.sb-nav a{display:block;font-family:var(--sans);font-size:14px;color:var(--t72);text-decoration:none;padding:5px 0 5px 14px;border-left:2px solid transparent;margin-left:-2px}
+.sb-nav a:hover{color:var(--hierro);border-left-color:var(--turquesa)}
+
+/* — canvas — */
+.sb-main{padding:54px 60px 120px;max-width:920px}
+.kicker{font-family:var(--mono);font-size:11px;font-weight:500;letter-spacing:.16em;text-transform:uppercase;color:var(--turquesa);margin:0 0 14px}
+h1{font-family:var(--serif);font-weight:600;font-size:clamp(32px,5vw,52px);line-height:1.1;letter-spacing:-.01em;color:var(--hierro);margin:0 0 14px}
+.lead{font-family:var(--serif);font-style:italic;font-size:21px;line-height:1.55;color:var(--t72);margin:0 0 40px;padding-bottom:30px;border-bottom:1px solid var(--border)}
+h2{font-family:var(--serif);font-weight:600;font-size:30px;line-height:1.2;color:var(--hierro);margin:56px 0 6px;padding-top:26px;border-top:1px solid var(--border);scroll-margin-top:24px}
+.h2-tag{font-family:var(--mono);font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--t45);display:block;margin-bottom:6px}
+h3{font-family:var(--sans);font-weight:600;font-size:18px;color:var(--hierro);margin:38px 0 10px}
+p{font-size:17px;line-height:1.72;margin:0 0 16px;color:var(--t87)}
+strong{color:var(--hierro);font-weight:600}
+em{font-style:italic}
+code{font-family:var(--mono);font-size:.86em;background:var(--surface-muted);padding:.12em .42em;border-radius:4px;color:var(--hierro)}
+
+/* — el "story": marco de muestra + pie — */
+.story{border:1px solid var(--border);border-radius:var(--r-lg);overflow:hidden;margin:22px 0 14px;background:var(--panel)}
+.story-canvas{padding:34px;display:flex;flex-wrap:wrap;gap:18px;align-items:center;background:var(--paper)}
+.story-canvas.col{flex-direction:column;align-items:stretch}
+.story-foot{font-family:var(--mono);font-size:11px;color:var(--t55);padding:10px 16px;border-top:1px solid var(--border);background:var(--surface-muted);letter-spacing:.02em}
+
+/* — swatches — */
+.swatches{display:grid;grid-template-columns:repeat(auto-fill,minmax(140px,1fr));gap:12px;margin:18px 0;list-style:none;padding:0}
+.sw{border:1px solid var(--border);border-radius:var(--r-md);overflow:hidden;background:var(--panel)}
+.sw .chip{height:58px}
+.sw .meta{padding:8px 10px}
+.sw .nm{font-family:var(--sans);font-size:12px;font-weight:600;color:var(--hierro);display:block;line-height:1.25}
+.sw .hex{font-family:var(--mono);font-size:10px;color:var(--t55);letter-spacing:.03em}
+.sw .rol{font-family:var(--sans);font-size:11px;color:var(--t55);display:block;margin-top:2px}
+.estrato{font-family:var(--mono);font-size:11px;font-weight:500;letter-spacing:.14em;text-transform:uppercase;color:var(--cobalto);margin:30px 0 2px}
+
+/* — tabla de tokens — */
+.tok{width:100%;border-collapse:collapse;margin:16px 0;font-size:14px}
+.tok th{font-family:var(--mono);font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--t55);text-align:left;padding:8px 10px;border-bottom:1px solid var(--border-strong)}
+.tok td{padding:9px 10px;border-bottom:1px solid var(--border);vertical-align:middle}
+.tok td.k{font-family:var(--mono);font-size:12px;color:var(--hierro)}
+.tok td.v{font-family:var(--mono);font-size:12px;color:var(--t72)}
+.tok .dot{display:inline-block;width:16px;height:16px;border-radius:4px;border:1px solid var(--border);vertical-align:-3px;margin-right:8px}
+
+/* ── COMPONENTES REALES (de ks-components.css) ── */
+.muda-chip{display:inline-flex;align-items:center;font-family:var(--sans);font-size:13px;font-weight:500;color:var(--t72);background:var(--surface-muted);border:1px solid var(--border);padding:4px 12px;border-radius:var(--r-sm)}
+.muda-tag{display:inline-flex;align-items:center;font-family:var(--mono);font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--turquesa-som);background:var(--tint-teal);padding:3px 10px;border-radius:var(--r-sm)}
+.muda-tag--node{color:var(--cobalto);background:#EEF1F5}
+.muda-notice{font-family:var(--sans);font-size:15px;padding:14px 18px;border-radius:var(--r-md);border-left:3px solid var(--turquesa);background:var(--tint-teal);color:var(--t87)}
+.muda-notice--red{border-left-color:var(--rojo);background:#F8EEEE}
+.muda-notice--beige{border-left-color:var(--caliza);background:#EFEEEA}
+.muda-callout{border:1px solid var(--border);border-radius:var(--r-md);padding:16px 20px;background:var(--panel)}
+.muda-callout__label{font-family:var(--mono);font-size:10px;font-weight:500;letter-spacing:.14em;text-transform:uppercase;color:var(--turquesa);display:block;margin-bottom:6px}
+.muda-card{border:1px solid var(--border);border-radius:var(--r-lg);overflow:hidden;background:var(--panel);max-width:340px;box-shadow:0 0 0 1px rgba(43,32,15,.04),0 1px 0 rgba(43,32,15,.06)}
+/* — franja de color de categoría (como en glosario) — */
+.muda-card.cat{border-top:none}
+.muda-card .cat-band{height:5px;width:100%}
+.muda-card-body{position:relative}
+.muda-card-body{padding:20px 22px 24px}
+.muda-card-overline{font-family:var(--mono);font-size:10px;font-weight:500;letter-spacing:.14em;text-transform:uppercase;color:var(--turquesa);display:block;margin-bottom:8px}
+.muda-card-title{font-family:var(--serif);font-weight:600;font-size:21px;line-height:1.2;color:var(--hierro);margin:0 0 8px}
+.muda-card-desc{font-size:15px;color:var(--t72);margin:0 0 16px;line-height:1.6}
+.muda-card-meta{display:flex;gap:14px;font-family:var(--mono);font-size:11px;color:var(--t55);border-top:1px solid var(--border);padding-top:12px}
+.muda-breadcrumbs{font-family:var(--sans);font-size:13px;color:var(--t55);display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+.muda-breadcrumbs a{color:var(--turquesa-som);text-decoration:none}
+.muda-bc-sep{color:var(--t45)}
+.muda-article-meta{display:flex;gap:16px;font-family:var(--mono);font-size:12px;color:var(--t55);flex-wrap:wrap}
+.muda-prose-demo{max-width:560px}
+.muda-prose-demo p{font-size:18px;line-height:1.72}
+
+/* — sello de deuda / duda — */
+.deuda{border-left:3px solid var(--goetita-tx);background:rgba(251,232,126,.16);padding:13px 17px;border-radius:0 var(--r-md) var(--r-md) 0;margin:20px 0;font-size:14px;font-family:var(--sans)}
+.deuda .tag{font-family:var(--mono);font-size:10px;font-weight:500;letter-spacing:.1em;text-transform:uppercase;color:var(--goetita-tx);display:block;margin-bottom:3px}
+.deuda.reconc{border-left-color:var(--rojo);background:rgba(172,73,82,.07)}
+.deuda.reconc .tag{color:var(--rojo)}
+.deuda.ok{border-left-color:var(--verde-teofrastita);background:rgba(47,143,103,.08)}
+.deuda.ok .tag{color:var(--verde-teofrastita)}
+
+/* — principios — */
+.princ{list-style:none;padding:0;margin:16px 0 8px}
+.princ li{padding:18px 0;border-bottom:1px solid var(--border)}
+.princ .pn{font-family:var(--serif);font-weight:600;font-size:21px;color:var(--turquesa-som);display:block;margin-bottom:4px}
+
+/* — footer de página (ancho completo) — */
+.muda-footer{border-top:1px solid var(--border-strong);background:var(--surface-muted);margin-top:40px}
+.muda-footer__in{max-width:1280px;margin:0 auto;padding:28px 60px;display:flex;flex-direction:column;gap:4px}
+.muda-footer__brand{font-family:var(--mono);font-weight:500;letter-spacing:.2em;text-transform:uppercase;font-size:14px;color:var(--hierro)}
+.muda-footer__txt{font-family:var(--sans);font-size:13px;color:var(--t72)}
+.muda-footer__meta{font-family:var(--mono);font-size:11px;color:var(--t55);letter-spacing:.03em}
+
+/* ── ÉNFASIS Y CITAS (componentes reales) ── */
+/* Pullquote · CSS web v7.4.3 */
+.muda-pullquote{font-family:var(--serif);font-size:18px;font-style:italic;line-height:1.45;color:var(--ink);padding-left:18px;border-left:3px solid var(--turquesa);margin:18px 0}
+/* Callout · CSS web v7.4.3 · variantes con línea fina */
+.muda-callout--brand{background:var(--tint-teal);border-color:rgba(0,153,153,.35)}
+.muda-callout--brand .muda-callout__label{color:var(--turquesa-som);font-size:11px;font-weight:600;letter-spacing:.1em;margin-bottom:12px}
+.muda-callout--brand p{font-family:var(--serif);font-size:17px;line-height:1.5;color:var(--ink);margin:0}
+/* variantes BEM pendientes de piel completa: --note (gris) · --related (cobre/naranja, disclaimer compatible) */
+.muda-callout--note{background:var(--surface-muted)}
+.muda-callout--note .muda-callout__label{color:var(--t55)}
+.muda-callout--related{background:#FFF1E6;border-color:rgba(198,126,62,.30)}
+.muda-callout--related .muda-callout__label{color:#BE501F}
+/* Subrayado flojito · glosario (.muda-hl) · gradiente media altura, color categoría 22% */
+.muda-hl{background:linear-gradient(180deg,transparent 55%,color-mix(in srgb,var(--cat,var(--turquesa)) 22%,transparent) 55%,color-mix(in srgb,var(--cat,var(--turquesa)) 22%,transparent) 92%,transparent 92%);color:inherit;padding:0 1px}
+/* quote-hl · glosario · barra vertical gradiente 30% color categoría */
+.muda-quote-hl{position:relative;font-family:var(--sans);font-size:15px;color:var(--t72);line-height:1.45;margin:0;padding-left:18px}
+.muda-quote-hl::before{content:"";position:absolute;left:0;top:2px;bottom:2px;width:5px;border-radius:2px;background:linear-gradient(180deg,color-mix(in srgb,var(--cat,var(--turquesa)) 38%,transparent),color-mix(in srgb,var(--cat,var(--turquesa)) 22%,transparent))}
+
+/* ── BOTONES · estados (doctrina iter12 en rejilla 10 stops) ── */
+.btn{font-family:var(--sans);font-size:15px;font-weight:600;border:none;border-radius:var(--r-sm);padding:11px 22px;cursor:pointer;color:#fff;line-height:1}
+.btn.outline{background:transparent;border:1.5px solid var(--cobalto);color:var(--cobalto)}
+.btn[disabled]{cursor:not-allowed;color:rgba(43,32,15,.38)}
+.state-row{display:flex;align-items:center;gap:14px;margin-bottom:10px}
+.state-row .tag{font-family:var(--mono);font-size:11px;color:var(--t55);width:64px}
+.state-stop{font-family:var(--mono);font-size:11px;color:var(--t55)}
+/* ── ALERTAS semánticas (bloque con barra de color) ── */
+.alert{font-family:var(--sans);font-size:15px;line-height:1.5;padding:13px 18px;border-radius:0 var(--r-md) var(--r-md) 0;border-left:4px solid;margin:0}
+.alert strong{font-weight:600}
+.alert.err{border-color:#AC4952;background:#F8EEEE}
+.alert.avi{border-color:#E96B2C;background:#FFF1E6}
+.alert.war{border-color:#B5841F;background:#FFFBEA}
+.alert.ok{border-color:#2F8F67;background:#EAF4EF}
+.alert.err strong{color:#873642}.alert.avi strong{color:#BE501F}.alert.war strong{color:#B5841F}.alert.ok strong{color:#2F8F67}
+/* ── FORMULARIO ── */
+.fld{font-family:var(--sans);font-size:15px;width:100%;padding:11px 14px;border:1px solid var(--border-strong);border-radius:var(--r-sm);background:var(--panel);color:var(--ink)}
+.fld:focus{outline:2px solid var(--turquesa);outline-offset:1px;border-color:var(--turquesa)}
+.chk-row{display:flex;align-items:center;gap:10px;margin-top:14px;font-family:var(--sans);font-size:15px;color:var(--t87)}
+.chk{width:20px;height:20px;border-radius:4px;background:var(--turquesa);display:inline-flex;align-items:center;justify-content:center;color:#fff;font-size:13px;flex:none}
+
+@media(max-width:900px){.sb{grid-template-columns:1fr}.sb-nav{position:sticky;top:0;align-self:start;height:100vh;overflow-y:auto;padding:30px 28px 40px 34px;border-right:1px solid var(--border);background:var(--surface-muted)}.sb-main{padding:36px 22px 80px}}
+</style>
+</head>
+<body>
+<div class="sb">
+
+<!-- ════════ SIDEBAR ════════ -->
+<nav class="sb-nav" aria-label="Índice del Storybook">
+  <p class="sb-brand">MUDA</p>
+  <p class="sb-sub">Storybook · Design System de KOI SAMSA</p>
+
+  <p class="grp grp--first">Introducción</p>
+  <a href="#intro">Qué es MUDA</a>
+  <a href="#principios">Los tres principios</a>
+  <a href="#reconciliacion">La reconciliación</a>
+
+  <p class="grp">Tokens de diseño</p>
+  <a href="#tok-color">Color · 14 piezas</a>
+  <a href="#tok-tipo">Tipografía</a>
+  <a href="#tok-espacio">Espaciado y radios</a>
+  <a href="#tok-sombra">Sombras</a>
+
+  <p class="grp">Átomos</p>
+  <a href="#a-chip">Chip</a>
+  <a href="#a-tag">Tag</a>
+  <a href="#a-boton">Botón · estados</a>
+  <a href="#a-notice">Notice</a>
+
+  <p class="grp">Moléculas</p>
+  <a href="#m-callout">Callout</a>
+  <a href="#m-breadcrumbs">Breadcrumbs</a>
+  <a href="#m-meta">Article meta</a>
+
+  <p class="grp">Énfasis y citas</p>
+  <a href="#e-callouts">Callouts (3 tipos)</a>
+  <a href="#e-quote">Quote / pullquote</a>
+  <a href="#e-quote-hl">Quote-hl</a>
+  <a href="#e-subrayado">Subrayado flojito</a>
+
+  <p class="grp">Organismos</p>
+  <a href="#o-card">Card</a>
+
+  <p class="grp">UI · estados</p>
+  <a href="#u-alertas">Alertas semánticas</a>
+  <a href="#u-form">Formulario</a>
+
+  <p class="grp">Plantillas / Páginas</p>
+  <a href="#p-prose">Prose editorial</a>
+  <a href="#p-galeria">La galería /lab</a>
+</nav>
+
+<!-- ════════ CANVAS ════════ -->
+<main class="sb-main">
+
+<!-- ░░░ INTRODUCCIÓN ░░░ -->
+<p class="kicker">Storybook de MUDA · en proceso de creación · v1</p>
+<h1 id="intro">MUDA</h1>
+<p class="lead">Un esqueleto, muchas pieles. La cosmología mineral que viste cada artefacto de KOI SAMSA.</p>
+
+<p>MUDA es el <strong>Design System de KOI SAMSA</strong>: la cosmología y las reglas de las que cada artefacto de la marca es una piel. No es un archivo CSS ni un manual, es el sistema base —la materia con su ley y las caras que la orientan— que sostiene todo lo que la marca produce, en web, software o impreso.</p>
+
+<p>El nombre carga doble significado, y los dos definen su propósito. <strong>Muda</strong>, en español, es la renovación de la piel: como la metamorfosis de Gregor Samsa y el viaje del koi, una estructura central fija que permite a los artefactos cambiar de piel visual de forma limpia y sistemática según el cliente. <strong>無駄 (Muda)</strong>, en japonés, es la eliminación del desperdicio del Lean: lo que MUDA elimina no es la identidad, sino lo que no tiene razón de existir. Belleza por sustracción: ni un token de más.</p>
+
+<h2><span class="h2-tag">Introducción</span>La poda en plan bonsái</h2>
+<p>MUDA se cuida como un bonsái: un árbol <strong>entero, completo y vivo</strong>, mantenido en su mínima expresión por poda constante. Nada le falta, nada le sobra. Cada pieza que entra justifica por qué no puede no existir; si un color o una medida se puede derivar de otra, se deriva, no se duplica. La poda no es limpieza puntual: es la disciplina que mantiene el sistema en forma. <em>Este Storybook es esa poda hecha visible — cada pieza mostrada existe de verdad en el sistema, y lo que aún no está firmado lleva su sello.</em></p>
+
+<h2 id="principios"><span class="h2-tag">Introducción</span>Los tres principios</h2>
+<p>No son criterios de calidad genéricos (esos los hereda del Kernel de 5 normas). Son los tres comportamientos que distinguen a MUDA y a ningún otro sistema.</p>
+<ul class="princ">
+  <li><span class="pn">Silencio</span>Está y no se nota. MUDA sostiene todo por debajo; quien usa el artefacto solo ve el artefacto, no el sistema trabajando. No es ausencia de identidad: es presencia que no se anuncia, como el esqueleto que te mantiene en pie sin que lo veas.</li>
+  <li><span class="pn">Cosmología</span>Una cosmología es un mundo con sus leyes: no un catálogo de piezas, sino el orden que explica por qué cada pieza es como es y cómo se sostiene el conjunto. En MUDA la materia tiene ley, y la ley <strong>engendra</strong> —como la tabla periódica, que no solo ordena lo que existe sino que predice y genera lo que falta. Eso convierte a MUDA en algo más que un archivo que se entrega: es un <strong>agente</strong> que aplica la ley para deducir qué pieza va dónde y producir las que aún no están. Un design system corriente es un catálogo que consultas; MUDA es una cosmología que opera —a la vez materia entregable y sistema que la engendra.</li>
+  <li><span class="pn">Andamiaje</span>Estructura fija que sostiene mientras la piel muda. El andamio es el chasis; la fachada cambia sin tocar lo que aguanta. Garantiza el Relevo: el andamio queda aunque la autora no esté delante.</li>
+</ul>
+
+<h2 id="reconciliacion"><span class="h2-tag">Introducción</span>La reconciliación</h2>
+<p>MUDA vivió mucho tiempo <strong>latente y disperso</strong>: el canon de color en una decisión, las rampas en otra, la tipografía en un tercer sitio, los tokens en el CSS de producción. No se hizo así por caos, sino por método: MUDA es la respuesta de diseño a mis clientes: mis proyectos personales. Reconciliar es traer todo eso a una sola fuente coherente. Este Storybook muestra el estado real de esa reconciliación —lo cerrado con un sello verde, lo que sigue abierto con su deuda a la vista. No se inventa nada.</p>
+<div class="deuda ok"><span class="tag">✓ Reconciliado / firmado</span>Las 14 piezas de color coinciden con el mismo hex en producción, glosario y !DECISIÓN. El <strong>sistema tipográfico está firmado</strong> (Newsreader/Albert/Fira/Material Symbols, 27-jun). El <code>tokens.json</code> DTCG existe como fuente real (139 tokens, válido estricto). El glosario quedó libre de los tokens oliva obsoletos.</div>
+<div class="deuda reconc"><span class="tag">Pendiente (volcar a producción)</span>Naranja Cobre (hex pendiente de ancla NCS) · las rampas CIELAB de 10 stops aún no volcadas al <code>tokens.json</code> · dark mode existe en doctrina, falta implementar en CSS.</div>
+
+<!-- ░░░ TOKENS ░░░ -->
+<h2 id="tok-color"><span class="h2-tag">Tokens de diseño</span>Color · las 14 piezas</h2>
+<p>El sistema cromático no es una paleta elegida: es una <strong>cosmología mineral</strong>. Cada color tiene origen químico real y de esa materia se deduce. Se organizan en cuatro estratos no excluyentes —una misma materia puede ocupar varios (el cobre es corporativo y semántico a la vez)—.</p>
+
+<p class="estrato">Neutros (4)</p>
+<ul class="swatches">
+  <li class="sw"><div class="chip" style="background:#2B200F"></div><div class="meta"><span class="nm">Hierro · Negro Óptico</span><span class="hex">#2B200F</span><span class="rol">Fe · tinta, texto, líneas</span></div></li>
+  <li class="sw"><div class="chip" style="background:#FAF9F7;border-bottom:1px solid var(--border)"></div><div class="meta"><span class="nm">Calcio · Blanco Mineral</span><span class="hex">#FAF9F7</span><span class="rol">Ca · lienzo (nunca blanco puro)</span></div></li>
+  <li class="sw"><div class="chip" style="background:#B3B7B8"></div><div class="meta"><span class="nm">Níquel</span><span class="hex">#B3B7B8</span><span class="rol">Ni · gris frío</span></div></li>
+  <li class="sw"><div class="chip" style="background:#D1CBBA"></div><div class="meta"><span class="nm">Caliza</span><span class="hex">#D1CBBA</span><span class="rol">CaCO₃ · neutro cálido</span></div></li>
+</ul>
+
+<p class="estrato">Corporativos (2 + cobre dual)</p>
+<ul class="swatches">
+  <li class="sw"><div class="chip" style="background:#00A6AB"></div><div class="meta"><span class="nm">Turquesa</span><span class="hex">#00A6AB</span><span class="rol">Cu₂(OH)₂CO₃ · marca dominante</span></div></li>
+  <li class="sw"><div class="chip" style="background:#335E82"></div><div class="meta"><span class="nm">Azul Cobalto</span><span class="hex">#335E82</span><span class="rol">CoO·Al₂O₃ · contrapunto</span></div></li>
+  <li class="sw"><div class="chip" style="background:#C67E3E"></div><div class="meta"><span class="nm">Naranja Cobre</span><span class="hex">#C67E3E</span><span class="rol">Cu · ⚠ hex pendiente NCS</span></div></li>
+</ul>
+
+<p class="estrato">De uso / semánticos (3 familias)</p>
+<ul class="swatches">
+  <li class="sw"><div class="chip" style="background:#AC4952"></div><div class="meta"><span class="nm">Rojo Óxido</span><span class="hex">#AC4952</span><span class="rol">Fe₂O₃ · error / crítico</span></div></li>
+  <li class="sw"><div class="chip" style="background:#FBE87E"></div><div class="meta"><span class="nm">Amarillo Goetita</span><span class="hex">#FBE87E</span><span class="rol">FeO(OH) · warning (señal)</span></div></li>
+  <li class="sw"><div class="chip" style="background:#2F8F67"></div><div class="meta"><span class="nm">Verde Teofrastita</span><span class="hex">#2F8F67</span><span class="rol">Ni(OH)₂ stop 750 · éxito / OK</span></div></li>
+</ul>
+
+<p class="estrato">Derivados (4)</p>
+<ul class="swatches">
+  <li class="sw"><div class="chip" style="background:#9DC5B9"></div><div class="meta"><span class="nm">Verde Pátina</span><span class="hex">#9DC5B9</span><span class="rol">Ni(OH)₂ stop 300 · verdigris corporativo</span></div></li>
+  <li class="sw"><div class="chip" style="background:#CE837A"></div><div class="meta"><span class="nm">Terra Rossa</span><span class="hex">#CE837A</span><span class="rol">fondo cálido</span></div></li>
+  <li class="sw"><div class="chip" style="background:#AE6586"></div><div class="meta"><span class="nm">Malva Eritrina</span><span class="hex">#AE6586</span><span class="rol">contrapunto sofisticado</span></div></li>
+  <li class="sw"><div class="chip" style="background:#EDC4BD"></div><div class="meta"><span class="nm">Mármol Rosa</span><span class="hex">#EDC4BD</span><span class="rol">masa luminosa</span></div></li>
+</ul>
+<div class="deuda"><span class="tag">⚠ Reconciliación</span>Estas 14 piezas viven firmadas en la !DECISIÓN; volcarlas al <code>tokens.json</code> es deuda abierta. Antes de volcar, <strong>contrastar con las rampas de las iteraciones de las Visual Guidelines</strong> (iter 11/12) — son la fuente CIELAB más afinada. El Cobre espera ancla NCS.</div>
+<div class="deuda"><span class="tag">⚠ Dark mode — pendiente</span>El dark mode «grafito templado» existe como doctrina (canvas <code>#161819</code> · page <code>#1B1D1E</code> · superficies que se aclaran al elevarse, níquel como matiz frío). <strong>Aún no implementado en este Storybook ni en el CSS de producción</strong> — falta firmar nº de stops de las rampas neutras y volcarlo.</div>
+<div class="deuda"><span class="tag">⚠ Exploración pendiente</span>Testear la identidad con un corporativo <strong>no-turquesa y no-neutro</strong> como marca dominante (Cobalto · Rojo Óxido · Malva · Teofrastita) — ver si MUDA sostiene el cambio de piel corporativa. Experimento de marca, no decidido.</div>
+
+<h2 id="tok-tipo"><span class="h2-tag">Tokens de diseño</span>Tipografía</h2>
+<p>Cuatro voces, una por función. La itálica de Newsreader es <em>auténtica</em> (diseñada, no inclinada por software). Mostrada aquí en su uso real.</p>
+<div class="story">
+  <div class="story-canvas col">
+    <div style="font-family:var(--serif);font-size:34px;font-weight:600;color:var(--hierro)">Newsreader · serif — titulares y prosa</div>
+    <div style="font-family:var(--serif);font-style:italic;font-size:22px;color:var(--t72)">Newsreader itálica · la voz de la cita y el énfasis</div>
+    <div style="font-family:var(--sans);font-size:18px;font-weight:500;color:var(--hierro)">Albert Sans · interfaz, labels, navegación</div>
+    <div style="font-family:var(--mono);font-size:15px;color:var(--turquesa-som)">Fira Code · datos, tokens, código · #00A6AB</div>
+  </div>
+  <div class="story-foot">--ks-typography-family-{serif · sans · mono · condensed}</div>
+</div>
+
+<h3>Dos cuerpos que conviven: press en serif, UI en sans</h3>
+<p>MUDA no tiene un cuerpo único: tiene <strong>dos registros de lectura que coexisten</strong>, cada uno con su voz y su propio ritmo vertical. El <strong>body press</strong> (Newsreader, serif) es para prosa, definiciones, lectura sostenida. El <strong>body UI</strong> (Albert Sans) es para interfaz, controles, metadatos. No compiten: cada uno gobierna su territorio, y juntos dan la textura editorial del sistema —probada en el glosario, donde la ficha (press) y su cromo de interfaz (UI) viven en la misma página sin estorbarse.</p>
+<div class="story">
+  <div class="story-canvas col" style="gap:0">
+    <p style="font-family:var(--serif);font-size:18px;line-height:1.4;color:var(--t87);margin:0 0 6px">El <strong>body press</strong> es serif. Newsreader a 18&nbsp;px con interlineado 1.4 —más ceñido que la norma genérica de 1.5, porque la serif esbelta se desestructura con demasiado aire—. Es la voz de la lectura larga: definiciones, prosa, el cuerpo del texto que se quiere leer sin cansancio.</p>
+    <p style="font-family:var(--sans);font-size:15px;line-height:1.45;color:var(--t72);margin:14px 0 0;border-top:1px solid var(--border);padding-top:14px">El body UI es sans. Albert Sans a 15&nbsp;px, interlineado 1.45, peso real un escalón por encima del nominal. Es la voz de la interfaz: labels, controles, metadatos, lo que se escanea en vez de leerse.</p>
+  </div>
+  <div class="story-foot">leading por voz · serif 1.4 · sans 1.45 · tight 1.15 — convivencia verificada en N07.a2 glosario</div>
+</div>
+<div class="deuda ok"><span class="tag">✓ Firmado (27-jun)</span>Sistema tipográfico de MUDA firmado y blindado: <strong>Newsreader</strong> (serif · prosa, títulos) · <strong>Albert Sans</strong> (UI + señalética, peso real = nominal +1) · <strong>Fira Sans / Fira Code</strong> (labels, datos, mono) · <strong>Material Symbols</strong> (iconos). Cada voz elegida con racional de oficio. Ver <em>!DECISIÓN — Sistema tipográfico MUDA firmado</em>.</div>
+<div class="deuda"><span class="tag">⚠ Pendiente menor</span>Embeber las fuentes propias (no depender de Google Fonts en producción).</div>
+
+<h2 id="tok-espacio"><span class="h2-tag">Tokens de diseño</span>Espaciado y radios</h2>
+<p>Escala base-8 para el espacio; tres radios para las esquinas. Verificados en <code>ks-tokens.css</code>.</p>
+<table class="tok">
+  <thead><tr><th>Token</th><th>Valor</th><th>Uso</th></tr></thead>
+  <tbody>
+    <tr><td class="k">--ks-space-xs</td><td class="v">8px</td><td>gaps mínimos</td></tr>
+    <tr><td class="k">--ks-space-md</td><td class="v">18px</td><td>padding de componente</td></tr>
+    <tr><td class="k">--ks-space-xl</td><td class="v">32px</td><td>separación de bloques</td></tr>
+    <tr><td class="k">--ks-space-4xl</td><td class="v">100px</td><td>aire de sección</td></tr>
+    <tr><td class="k">--ks-radius-sm</td><td class="v">5px</td><td>chips, tags</td></tr>
+    <tr><td class="k">--ks-radius-md</td><td class="v">10px</td><td>notices, inputs, callouts</td></tr>
+    <tr><td class="k">--ks-radius-lg</td><td class="v">15px</td><td>cards, wraps editoriales</td></tr>
+  </tbody>
+</table>
+<div class="story">
+  <div class="story-canvas">
+    <div style="width:90px;height:60px;background:var(--tint-teal);border:1px solid var(--turquesa);border-radius:5px;display:flex;align-items:center;justify-content:center;font-family:var(--mono);font-size:11px;color:var(--turquesa-som)">5px</div>
+    <div style="width:90px;height:60px;background:var(--tint-teal);border:1px solid var(--turquesa);border-radius:10px;display:flex;align-items:center;justify-content:center;font-family:var(--mono);font-size:11px;color:var(--turquesa-som)">10px</div>
+    <div style="width:90px;height:60px;background:var(--tint-teal);border:1px solid var(--turquesa);border-radius:15px;display:flex;align-items:center;justify-content:center;font-family:var(--mono);font-size:11px;color:var(--turquesa-som)">15px</div>
+  </div>
+  <div class="story-foot">radius sm · md · lg — sin redondeo en bordes de un solo lado</div>
+</div>
+
+<h2 id="tok-sombra"><span class="h2-tag">Tokens de diseño</span>Sombras</h2>
+<p>Microvolumen físico, nunca sombra digital realista. Tres niveles.</p>
+<div class="story">
+  <div class="story-canvas">
+    <div style="width:130px;height:80px;background:#fff;border-radius:var(--r-md);box-shadow:0 1px 0 rgba(43,32,15,.08);display:flex;align-items:center;justify-content:center;font-family:var(--mono);font-size:11px;color:var(--t55)">soft</div>
+    <div style="width:130px;height:80px;background:#fff;border-radius:var(--r-md);box-shadow:0 0 0 1px rgba(43,32,15,.07),0 1px 0 rgba(43,32,15,.08);display:flex;align-items:center;justify-content:center;font-family:var(--mono);font-size:11px;color:var(--t55)">card</div>
+    <div style="width:130px;height:80px;background:#fff;border-radius:var(--r-md);box-shadow:0 4px 16px rgba(29,20,12,.10);display:flex;align-items:center;justify-content:center;font-family:var(--mono);font-size:11px;color:var(--t55)">float</div>
+  </div>
+  <div class="story-foot">--ks-shadow-soft · card · float</div>
+</div>
+
+<!-- ░░░ ÁTOMOS ░░░ -->
+<h2 id="a-chip"><span class="h2-tag">Átomos</span>Chip</h2>
+<p>El componente mínimo de etiquetado neutro. Fondo apagado, borde sutil, radio sm.</p>
+<div class="story">
+  <div class="story-canvas">
+    <span class="muda-chip">Diseño</span>
+    <span class="muda-chip">Branding</span>
+    <span class="muda-chip">Sistema</span>
+  </div>
+  <div class="story-foot">.muda-chip · radius-sm · surface-muted</div>
+</div>
+
+<h2 id="a-tag"><span class="h2-tag">Átomos</span>Tag</h2>
+<p>Etiqueta cromática en mono mayúsculas. Variante por defecto (turquesa) y de nodo (cobalto).</p>
+<div class="story">
+  <div class="story-canvas">
+    <span class="muda-tag">UX Research</span>
+    <span class="muda-tag">Design Systems</span>
+    <span class="muda-tag muda-tag--node">NODE 07</span>
+  </div>
+  <div class="story-foot">.muda-tag · .muda-tag--node · mono uppercase</div>
+</div>
+
+<h2 id="a-boton"><span class="h2-tag">Átomos</span>Botón · estados</h2>
+<p>La rejilla de 10 stops es fija; lo que cambia es <strong>dónde reposa cada color según su naturaleza</strong>: un color claro reposa claro (Pátina 300), uno oscuro reposa oscuro con texto blanco (Cobalto 700). Desde el reposo, hover y active saltan hacia la sombra de la rampa. La luminosidad decide el stop, no la jerarquía de marca.</p>
+
+<h3>Primario · teal (reposo 500)</h3>
+<div class="story">
+  <div class="story-canvas col">
+    <div class="state-row"><span class="tag">enabled</span><button class="btn" style="background:#009999">Acción</button><span class="state-stop">#009999 · 3.49:1 · roza AA·grande (texto ≥18px)</span></div>
+    <div class="state-row"><span class="tag">hover</span><button class="btn" style="background:#008B96">Acción</button><span class="state-stop">stop 700 · 4.09:1 · AA-grande✓</span></div>
+    <div class="state-row"><span class="tag">active</span><button class="btn" style="background:#00707F">Acción</button><span class="state-stop">stop 900 · 5.79:1 · AA✓</span></div>
+    <div class="state-row"><span class="tag">disabled</span><button class="btn" style="background:#9BD6D4" disabled>Acción</button><span class="state-stop">stop 100 · n/a (disabled exento)</span></div>
+  </div>
+  <div class="story-foot">teal · enabled #009999 (CMYK 100/0/0/40 · pasa WCAG · imprimible limpio) · todos los estados activos cumplen AA</div>
+</div>
+
+<h3>Secundario · cobalto (reposo 500 — base firmada)</h3>
+<div class="story">
+  <div class="story-canvas col">
+    <div class="state-row"><span class="tag">enabled</span><button class="btn" style="background:#335E82">Acción</button><span class="state-stop">stop 500 · 6.85:1 · AA✓</span></div>
+    <div class="state-row"><span class="tag">hover</span><button class="btn" style="background:#224869">Acción</button><span class="state-stop">stop 700 · 9.55:1 · AA✓</span></div>
+    <div class="state-row"><span class="tag">active</span><button class="btn" style="background:#113451">Acción</button><span class="state-stop">stop 900 · 12.85:1 · AA✓</span></div>
+    <div class="state-row"><span class="tag">disabled</span><button class="btn" style="background:#D5E0EB" disabled>Acción</button><span class="state-stop">stop 100 · n/a (disabled exento)</span></div>
+  </div>
+  <div class="story-foot">cobalto · reposo 500 (#335E82, base firmada) · estados saltan de 2 en 2 · todos cumplen AA con texto blanco</div>
+</div>
+
+<h3>Outline + variantes de reposo natural</h3>
+<div class="story">
+  <div class="story-canvas">
+    <button class="btn outline">Outline cobalto</button>
+    <button class="btn" style="background:#82B6A5;color:#2B200F">Pátina (reposo 300)</button>
+    <button class="btn" style="background:#2F8F67">Confirmar · teofrastita 700</button>
+  </div>
+  <div class="story-foot">.btn .outline · cada familia reposa en su stop natural (Pátina 300 claro · Teofrastita 700 oscuro)</div>
+</div>
+
+<h2 id="a-notice"><span class="h2-tag">Átomos</span>Notice</h2>
+<p>Aviso de una línea con barra de color semántico. El color sale del estrato de uso, no se elige a capricho.</p>
+<div class="story">
+  <div class="story-canvas col">
+    <div class="muda-notice">Notice por defecto · turquesa, la voz de la marca.</div>
+    <div class="muda-notice muda-notice--red">Notice de error · rojo óxido <code>#AC4952</code>, crítico estructural.</div>
+    <div class="muda-notice muda-notice--beige">Notice neutro · caliza, para apuntes sin urgencia.</div>
+  </div>
+  <div class="story-foot">.muda-notice · --teal · --red · --beige</div>
+</div>
+
+<!-- ░░░ MOLÉCULAS ░░░ -->
+<h2 id="m-callout"><span class="h2-tag">Moléculas</span>Callout</h2>
+<p>Bloque destacado: label en mono + cuerpo. Combina un átomo (label) con prosa.</p>
+<div class="story">
+  <div class="story-canvas col">
+    <div class="muda-callout">
+      <span class="muda-callout__label">Cosmología</span>
+      <p style="margin:0;font-size:16px">La materia tiene ley y la ley engendra: MUDA no es un catálogo que consultas, es un sistema que deduce qué pieza va dónde y genera las que faltan.</p>
+    </div>
+  </div>
+  <div class="story-foot">.muda-callout + .muda-callout__label</div>
+</div>
+
+<h2 id="m-breadcrumbs"><span class="h2-tag">Moléculas</span>Breadcrumbs</h2>
+<p>Ruta de navegación. Átomos (enlaces + separador) combinados en una fila.</p>
+<div class="story">
+  <div class="story-canvas">
+    <nav class="muda-breadcrumbs"><a href="#">KOI SAMSA</a><span class="muda-bc-sep">/</span><a href="#">Studio</a><span class="muda-bc-sep">/</span><a href="#">MUDA</a><span class="muda-bc-sep">/</span><span>Storybook</span></nav>
+  </div>
+  <div class="story-foot">.muda-breadcrumbs · .muda-bc-sep</div>
+</div>
+
+<h2 id="m-meta"><span class="h2-tag">Moléculas</span>Article meta</h2>
+<p>Fila de metadatos de artículo: fecha, tiempo de lectura, nodo. Mono, color tenue.</p>
+<div class="story">
+  <div class="story-canvas">
+    <div class="muda-article-meta"><span>29 jun 2026</span><span>· 6 min de lectura</span><span>· NODE 07</span></div>
+  </div>
+  <div class="story-foot">.muda-article-meta</div>
+</div>
+
+<!-- ░░░ ÉNFASIS Y CITAS ░░░ -->
+<h2 id="e-callouts"><span class="h2-tag">Énfasis y citas</span>Callout — las 3 variantes</h2>
+<p>Un mismo componente, tres variantes por <strong>función</strong> (modificadores BEM). Las tres comparten el mismo tratamiento sutil —caja de línea fina, sin bordes gruesos— y se distinguen solo por su color y su label. El callout es info contextual que carga con la página —no es semántico de estado (no hay éxito/error), eso son los notices—. Cada variante responde a un rol, no a un color.</p>
+<div class="story">
+  <div class="story-canvas col">
+    <div class="muda-callout muda-callout--brand">
+      <span class="muda-callout__label">Nota de marca</span>
+      <p><code>--brand</code> · color corporativo (turquesa en esta piel, variable en otra). El añadido de gran valor: lo que el sistema quiere que no se te escape.</p>
+    </div>
+    <div class="muda-callout muda-callout--note">
+      <span class="muda-callout__label">Apunte</span>
+      <p><code>--note</code> · siempre gris. El apunte neutro al margen, que acompaña sin pesar.</p>
+    </div>
+    <div class="muda-callout muda-callout--related">
+      <span class="muda-callout__label">Remisión</span>
+      <p><code>--related</code> · siempre cobre. Remite a una pieza hermana («mira también esto»); admite el matiz disclaimer sin salirse del color.</p>
+    </div>
+  </div>
+  <div class="story-foot">.muda-callout + --brand / --note / --related · variantes BEM por función, no por color</div>
+</div>
+
+<h2 id="e-quote"><span class="h2-tag">Énfasis y citas</span>Quote / pullquote</h2>
+<p>Frase propia destacada: serif itálica, borde izquierdo turquesa. Para terceros se usa <code>&lt;blockquote&gt;</code>; esto es la voz de la casa.</p>
+<div class="story">
+  <div class="story-canvas col">
+    <blockquote class="muda-pullquote">El material es uno: la materia con su ley. Cada scope es una orientación del mismo material, no un material distinto.</blockquote>
+  </div>
+  <div class="story-foot">.muda-pullquote · serif itálica · borde turquesa</div>
+</div>
+
+<h2 id="e-quote-hl"><span class="h2-tag">Énfasis y citas</span>Quote-hl</h2>
+<p>Una <strong>venida a más del subrayado <code>hl</code></strong>: el mismo rotulador semitransparente, pero de pie —barra vertical con gradiente al <strong>color de la categoría</strong>—. Regla de uso: se aplica solo cuando la cita <strong>supera la línea y media y no pasa de tres</strong> (varía en responsive). Aquí en tres categorías para verlo.</p>
+<div class="story">
+  <div class="story-canvas col">
+    <p class="muda-quote-hl" style="--cat:var(--turquesa)">El experimento controlado que reparte el tráfico entre variantes para medir cuál convierte mejor.</p>
+    <p class="muda-quote-hl" style="--cat:var(--malva)">Un valor con nombre que el sistema reutiliza, en lugar de repetir el número crudo.</p>
+    <p class="muda-quote-hl" style="--cat:var(--rojo)">La métrica que de verdad importa, la que el experimento intenta mover.</p>
+  </div>
+  <div class="story-foot">.muda-quote-hl · barra vertical, gradiente 38→22% · color = categoría (--cat) · uso: cita de 1,5 a 3 líneas</div>
+</div>
+
+<h2 id="e-subrayado"><span class="h2-tag">Énfasis y citas</span>Subrayado flojito</h2>
+<p>El rotulador del glosario: un gradiente que pinta solo la <strong>mitad inferior</strong> del texto (55%→92%), como un marcador que pasa por debajo —no un bloque de fondo, no un subrayado—. Al 22%, ligado al color de la categoría.</p>
+<div class="story">
+  <div class="story-canvas col">
+    <p style="font-family:var(--serif);font-size:18px;line-height:1.6;color:var(--t87);margin:0">El A/B Testing reparte el tráfico entre variantes: lo que mide es <span class="muda-hl" style="--cat:var(--turquesa)">la diferencia entre lo que crees y lo que pasa</span>. La hipótesis se confirma con datos, no con opinión.</p>
+    <p style="font-family:var(--serif);font-size:18px;line-height:1.6;color:var(--t87);margin:0">Un design token bien puesto hace que <span class="muda-hl" style="--cat:var(--malva)">cambiar un valor una vez se propague a todo el sistema</span> sin tocar nada más.</p>
+  </div>
+  <div class="story-foot">.muda-hl · gradiente media altura 55-92% · 22% · color categoría</div>
+</div>
+
+<!-- ░░░ ORGANISMOS ░░░ -->
+<h2 id="o-card"><span class="h2-tag">Organismos</span>Card</h2>
+<p>Estructura compuesta: overline + título + descripción + meta. Reúne varias moléculas en una unidad navegable. Hay <strong>dos tipos</strong> en el sistema, y la diferencia es deliberada.</p>
+
+<h3>Card de portfolio — blanca, neutro by design</h3>
+<p>La card de un proyecto o artefacto es <strong>neutra</strong>: sin color de marca, para que el contenido (la miniatura, el título) mande. El sistema calla — principio de Silencio.</p>
+<div class="story">
+  <div class="story-canvas">
+    <article class="muda-card">
+      <div class="muda-card-body">
+        <span class="muda-card-overline">Artefacto · /lab</span>
+        <h3 class="muda-card-title">Glosario de producto digital</h3>
+        <p class="muda-card-desc">180 fichas, 9 categorías cromáticas. La prueba viva del Andamiaje.</p>
+        <div class="muda-card-meta"><span>N07.a2</span><span>180 fichas</span><span>v1.2</span></div>
+      </div>
+    </article>
+  </div>
+  <div class="story-foot">.muda-card · neutra · sin franja</div>
+</div>
+
+<h3>Card de glosario — franja de color por categoría</h3>
+<p>La ficha del glosario lleva una <strong>franja superior con el color de su categoría</strong>: el mismo color es la señal y el sistema de orientación. Por eso el glosario usa tantos colores —uno por cada una de sus 9 categorías, todos del canon—. La franja sale de la pieza cromática de la categoría, no de un color suelto.</p>
+<div class="story">
+  <div class="story-canvas">
+    <article class="muda-card cat" style="max-width:240px">
+      <div class="cat-band" style="background:var(--turquesa)"></div>
+      <div class="muda-card-body">
+        <span class="muda-card-overline" style="color:var(--turquesa-som)">UX Research</span>
+        <h3 class="muda-card-title" style="font-size:19px">A/B Testing</h3>
+        <p class="muda-card-desc" style="margin-bottom:0">Experimento controlado que reparte el tráfico entre variantes.</p>
+      </div>
+    </article>
+    <article class="muda-card cat" style="max-width:240px">
+      <div class="cat-band" style="background:var(--cobalto)"></div>
+      <div class="muda-card-body">
+        <span class="muda-card-overline" style="color:var(--cobalto)">UI &amp; Visual</span>
+        <h3 class="muda-card-title" style="font-size:19px">Jerarquía visual</h3>
+        <p class="muda-card-desc" style="margin-bottom:0">El orden en que el ojo recorre los elementos de una pantalla.</p>
+      </div>
+    </article>
+    <article class="muda-card cat" style="max-width:240px">
+      <div class="cat-band" style="background:var(--malva)"></div>
+      <div class="muda-card-body">
+        <span class="muda-card-overline" style="color:var(--malva)">Design Systems</span>
+        <h3 class="muda-card-title" style="font-size:19px">Design Token</h3>
+        <p class="muda-card-desc" style="margin-bottom:0">Valor con nombre que el sistema reutiliza en lugar del número crudo.</p>
+      </div>
+    </article>
+  </div>
+  <div class="story-foot">.muda-card.cat + .cat-band · color = pieza de la categoría (9 categorías = 9 colores del canon)</div>
+</div>
+
+<!-- ░░░ PLANTILLAS ░░░ -->
+<h2 id="p-prose"><span class="h2-tag">Plantillas / Páginas</span>Prose editorial</h2>
+<p>Cómo se ve el sistema completo en una página de lectura: serif a 18px, interlineado 1.72, medida de 65-70 caracteres. El silencio del sistema en acto —solo se ve el texto.</p>
+<div class="story">
+  <div class="story-canvas col">
+    <div class="muda-prose-demo">
+      <p style="font-family:var(--serif);font-size:18px;line-height:1.72;color:var(--t87)">El material es uno: la materia con su ley. El poliedro tiene caras —los scopes—, y cada cara es una orientación del mismo material, no un material distinto. Una cara no inventa una sustancia nueva; es el mismo bloque tallado desde otro ángulo.</p>
+      <p style="font-family:var(--serif);font-size:18px;line-height:1.72;color:var(--t87)">Ningún scope puede traer un material que el bloque no tenga. La identidad de cada cara nace de <em>cómo orienta y combina</em> el material común.</p>
+    </div>
+  </div>
+  <div class="story-foot">prose · Newsreader 18px · line 1.72 · max 680px</div>
+</div>
+
+<h2 id="p-galeria"><span class="h2-tag">Plantillas / Páginas</span>La galería /lab</h2>
+<p>Varias cards juntas: cómo el Andamiaje se prueba en serie. Mismo esqueleto, distinta piel vía scopes. Cada artefacto de <code>/lab</code> lleva MUDA inyectado.</p>
+<div class="story">
+  <div class="story-canvas">
+    <article class="muda-card" style="max-width:260px">
+      <div class="muda-card-body">
+        <span class="muda-card-overline">Artefacto</span>
+        <h3 class="muda-card-title" style="font-size:18px">Ouroboros</h3>
+        <p class="muda-card-desc" style="margin-bottom:12px">La pieza más currada del sistema.</p>
+        <div class="muda-card-meta"><span>N17.a1</span></div>
+      </div>
+    </article>
+    <article class="muda-card" style="max-width:260px">
+      <div class="muda-card-body">
+        <span class="muda-card-overline">Artefacto</span>
+        <h3 class="muda-card-title" style="font-size:18px">Glosario</h3>
+        <p class="muda-card-desc" style="margin-bottom:12px">La prueba del Andamiaje.</p>
+        <div class="muda-card-meta"><span>N07.a2</span></div>
+      </div>
+    </article>
+  </div>
+  <div class="story-foot">galería /lab · Andamiaje en serie</div>
+</div>
+
+<!-- ░░░ UI · ESTADOS Y FORMULARIO ░░░ -->
+<h2 id="u-alertas"><span class="h2-tag">UI · estados</span>Alertas semánticas</h2>
+<p>Las cuatro familias de uso, cada una con su materia: error (rojo óxido), aviso (cobre), warning (goetita), OK (verde teofrastita). Bloque con barra de color y fondo claro de su rampa. Aquí el color SÍ es semántico —al revés que el callout—.</p>
+<div class="story">
+  <div class="story-canvas col">
+    <div class="alert err"><strong>Error.</strong> Rojo óxido — algo falló y hay que corregirlo.</div>
+    <div class="alert avi"><strong>Aviso.</strong> Cobre/naranja — atención, revisa antes de seguir.</div>
+    <div class="alert war"><strong>Warning.</strong> Amarillo goetita — cuidado, condición pendiente.</div>
+    <div class="alert ok"><strong>OK.</strong> Verde teofrastita — confirmado, todo correcto.</div>
+  </div>
+  <div class="story-foot">.alert · err / avi / war / ok — color semántico de su rampa firmada</div>
+</div>
+
+<h2 id="u-form"><span class="h2-tag">UI · estados</span>Formulario</h2>
+<p>Campo de texto y checkbox, sobre papel sílice. El foco usa el turquesa de marca; el check marcado, también.</p>
+<div class="story">
+  <div class="story-canvas col">
+    <input class="fld" type="text" placeholder="Campo de texto sobre sílice">
+    <label class="chk-row"><span class="chk">✓</span> Checkbox marcado en teal</label>
+  </div>
+  <div class="story-foot">.fld (input · foco turquesa) · .chk (check teal)</div>
+</div>
+
+</main>
+</div>
+<footer class="muda-footer">
+  <div class="muda-footer__in">
+    <span class="muda-footer__brand">MUDA</span>
+    <span class="muda-footer__txt">Design System de KOI SAMSA · Storybook en proceso de creación · v1</span>
+    <span class="muda-footer__meta">Piel del propio MUDA · hex verificados contra la !DECISIÓN Sistema cromático 14 piezas · 2026-06</span>
+  </div>
+</footer>
+</body>
+</html>
